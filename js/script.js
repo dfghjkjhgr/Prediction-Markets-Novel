@@ -54,7 +54,7 @@ monogatari.assets ('voices', {
 
 // Define the sounds used in the game.
 monogatari.assets ('sounds', {
-
+	"gunshot": "gunshot.mp3",
 });
 
 // Define the videos used in the game.
@@ -101,7 +101,26 @@ monogatari.characters ({
 	sprites: {
 	    withBeer: "Everyman-normal-wbeer.png",
 	},
-    }
+    },
+	"truth": {
+		name: "Mysterious Man",
+		color: "#27C8F5",
+		sprites: {
+		    normal: "Truth-Man.png",
+		    shocked: "Truth-Man-Shocked.png",
+		    dying: "Truth-Man-Dying.png",
+		    dead: "Truth-Man-Dead.png"
+		}
+	},
+	"mafia": {
+		name: "Prediction Mafia",
+		color: "#FFFFFF",
+		sprites: {
+			normal: "PM.png"
+		}
+	}
+
+	
 });
 
 monogatari.script ({
@@ -133,7 +152,47 @@ monogatari.script ({
 	    "joe Can people really make money off of classified information with them?",
 	    "joe What does this mean for our democracy, and the world at large?",
 	    "joe It would be great if there was someone in this bar to come and help explain it to me.",
- 	    "end"
-	    
-		]
+	        "show character truth normal at right with fadeIn",
+	    "truth I know the truth about prediction markets! I can't wait to tell you all about it.",
+	    "joe You look familiar...",
+	    "joe Wait a minute, is it you, my best friend Jeff? I haven't seen you in 6 years! You just disappeared one day!",
+	    "joe What happened to your eye? Where have you been all this time?",
+	    "truth All in due time, my friend. First, I must answer your question--",
+            "show character mafia normal at left with move transtiion 2s",
+	    "play sound gunshot",
+	    "show character truth shocked at right",
+	    "joe WHAAAAT???",
+	    "joe WHY DID YOU GUYS DO THAT??!?!?!?",
+	    "hide character mafia at left with slideOutLeft",
+	    "show character truth dying at right",
+	    "truth I was expecting something like this to happen.",
+	    "truth There was a prediction market for how many people would go to the Knicks finals game.",
+	    "truth I bought a ticket for you as a gift, but the mafia was betting that not many people would go.",
+	    "truth The mafia thought that I had bought the ticket for myself, so they killed be to make sure that they would win their bet.",
+	    "joe Life just sucks.",
+	    "truth Well, bro, this is the end. You're going to have to edutain yourself in this game.",
+	    "show character truth dead at right",
+	    "joe Don't leave me Jeff! I have so many questions!",
+	    "joe NOOOO!!!",
+	    "joe I have to do <i>something</i>!",
+	    {"Choice": {
+		"Revenge": {
+		    "Text": "Take revenge on the prediction markets for leading to the death of your friend",
+		    "Do": "jump Revenge"
+		},
+		"Learn": {
+		    "Text": "Learn about what is a prediction market first",
+		    "Do": "jump Learn"
+		}
+	    }},
+    ],
+    "Revenge": [
+	"joe I'm going to go to the prediction market headquarters and take my revenge RIGHT NOW!",
+	"Joe puts in prediction market headquarters into the GPS of his self-driving Tesla.",
+	"However there are multiple predicition markets, including Polymarket and Kalshi.",
+	"Due to a bug in the code, it explodes..."
+    ],
+    "Learn": [
+	"joe I'm going to go home and learn about prediction markets. Once I know my enemy, I can take revenge.",
+    ]
 });
